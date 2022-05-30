@@ -50,6 +50,7 @@ function calc() {
   const totalDeduction = orgCut + tankCutTotal;
   const finalPot = raid.payout - totalDeduction;
   const finalPayoutEach = Math.floor(finalPot / raid.players);
+  const newOrgCut = orgCut - healerCut;
   if (finalPot + totalDeduction > raid.payout) {
     console.log("Something went wrong");
   } else if (raid.healerCount <= 0) {
@@ -77,7 +78,7 @@ function calc() {
     console.log("***********************************");
     console.log(`Original Pot: `, parseInt(raid.payout));
     console.log(`Total Deductions: `, totalDeduction);
-    console.log(`Org Cut: `, orgCut);
+    console.log(`Org Cut: `, newOrgCut);
     console.log(`Tank Cut Total: `, tankCutTotal);
     console.log(`Tank Cut Each: `, tankCutEach);
     console.log(`Healer Cut Total: `, healerCut);
