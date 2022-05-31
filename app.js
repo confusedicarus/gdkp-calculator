@@ -16,7 +16,7 @@ function initData() {
       },
       {
         type: "input",
-        message: "How many Tanks?",
+        message: "How many Tanks are getting a bonus?",
         name: "tankCount",
       },
       {
@@ -48,19 +48,27 @@ function calc() {
   const healerCut = Math.floor(orgCut * 0.1);
   const healerCutEach = Math.floor(healerCut / raid.healerCount);
   const totalDeduction = orgCut + tankCutTotal;
+  const noTankDeducation = raid.payout - orgCut;
+  const noTankPayout = Math.floor(noTankDeducation / raid.players);
   const finalPot = raid.payout - totalDeduction;
   const finalPayoutEach = Math.floor(finalPot / raid.players);
   const newOrgCut = orgCut - healerCut;
+  console.log("***********************************");
+  console.log("*                                 *");
+  console.log("*                                 *");
+  console.log("*     GDKP Payout Breakdown       *");
+  console.log("*                                 *");
+  console.log("*                                 *");
+  console.log("***********************************");
   if (finalPot + totalDeduction > raid.payout) {
     console.log("Something went wrong");
+  } else if (raid.tankCount <= 0) {
+    console.log(`Original Pot: `, parseInt(raid.payout));
+    console.log(`Total Deductions: `, orgCut);
+    console.log(`Org Cut: `, orgCut);
+    console.log(`Pot: `, noTankDeducation);
+    console.log(`Each Player Payout: `, noTankPayout);
   } else if (raid.healerCount <= 0) {
-    console.log("***********************************");
-    console.log("*                                 *");
-    console.log("*                                 *");
-    console.log("*     GDKP Payout Breakdown       *");
-    console.log("*                                 *");
-    console.log("*                                 *");
-    console.log("***********************************");
     console.log(`Original Pot: `, parseInt(raid.payout));
     console.log(`Total Deductions: `, totalDeduction);
     console.log(`Org Cut: `, orgCut);
@@ -69,13 +77,6 @@ function calc() {
     console.log(`Pot: `, finalPot);
     console.log(`Each Player Payout: `, finalPayoutEach);
   } else {
-    console.log("***********************************");
-    console.log("*                                 *");
-    console.log("*                                 *");
-    console.log("*     GDKP Payout Breakdown       *");
-    console.log("*                                 *");
-    console.log("*                                 *");
-    console.log("***********************************");
     console.log(`Original Pot: `, parseInt(raid.payout));
     console.log(`Total Deductions: `, totalDeduction);
     console.log(`Org Cut: `, newOrgCut);
